@@ -40,3 +40,11 @@ Title, The Problem, The Solution, Hard Part, Tauren Incident, Pick a Face (races
 
 - The `task-observer` skill named in CLAUDE.md is not installed in this environment and could not be invoked.
 - Committed and pushed to origin main as instructed.
+
+## Round 3: items 20 to 22
+
+20. **Clea footnote.** One small italic line at the bottom of The Ask: Clea, the AI in the Discord, can answer any WoW Forever question there anytime (classes, routes, gear). No Clea slide, no introduction.
+21. **Death counter.** Starts at 0 on page load. The timer based increment and the date based starting number are gone. It ticks exactly once per raider the moment that raider's status flips to Dead in the wipe animation, with the death sound on the same frame. Verified headlessly: 0 on enter, 3 after the party wipes, three Dead statuses.
+22. **If You Do Not Play.** New slide 13, right before The Ask. Grayscale page, animated CSS rain overlay, a desaturated misty marsh hero, and a lone figure in the middle of a grey field with three faded ghosts labelled Jack, Justin and Phil drifting at the edges (Phil's ghost is still on fire). Tears drop from the figure every 0.7 seconds. Heading, lede, scene, quotes and closing line fade in slowly in sequence over about nine seconds. Quotes: Arthas ("I see... only darkness... before me."), the Grom and Thrall exchange, Poe's Nevermore, Tennyson's loved and lost, and "Phil is still in the fire." Sound is all WebAudio in `js/audio.js`: a looping original D minor lament on a detuned sawtooth pair with vibrato and a lowpass (the violin), plus synthesized sobbing (bursts of bandpassed noise with falling triangle whimpers and a long wobbling wail) scheduled at random gaps. Everything runs through one gain bus that fades in over 2.5 seconds, fades out on leaving the slide, cuts immediately on mute, and restarts if you unmute while on the slide.
+
+Verification: served locally, driven with headless Chrome through Playwright at 1280x800 and 390x844. All 14 slides, zero console errors, zero page errors, zero failed requests. Grep: no em or en dashes.

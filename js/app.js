@@ -18,7 +18,10 @@
     muteBtn.setAttribute('aria-label', SFX.muted ? 'Unmute sound' : 'Mute sound');
     muteBtn.title = SFX.muted ? 'Sound off' : 'Sound on';
   }
-  muteBtn.addEventListener('click', () => { SFX.toggle(); setMuteUI(); if (!SFX.muted) SFX.click(); });
+  muteBtn.addEventListener('click', () => {
+    SFX.toggle(); setMuteUI();
+    if (!SFX.muted) { SFX.click(); if (cur >= 0 && slides[cur].id === 's-sad') SFX.sadStart(); }
+  });
   setMuteUI();
 
   function go(i, silent) {
@@ -75,9 +78,9 @@
     const wipe = document.getElementById('wipe');
     const raiders = Array.from(wipe.querySelectorAll('.raider'));
     const countEl = document.getElementById('deathcount');
-    const base = Math.floor((Date.now() - Date.UTC(2026, 5, 1)) / 600000) + 1337;
-    let count = base, timer = 0, raf = 0, running = false;
-    countEl.textContent = count.toLocaleString();
+    /* Starts at zero. Ticks once per on-screen death and never on a timer. */
+    let count = 0, raf = 0, running = false;
+    countEl.textContent = '0';
     const rates = [16, 18, 30];
     function run() {
       let hp = [100, 100, 100], dead = [false, false, false], last = null;
@@ -99,8 +102,8 @@
       raf = requestAnimationFrame(step);
     }
     hooks['s-problem'] = {
-      enter() { running = true; run(); timer = setInterval(() => { count++; countEl.textContent = count.toLocaleString(); }, 1400); },
-      leave() { running = false; cancelAnimationFrame(raf); clearInterval(timer); }
+      enter() { running = true; run(); },
+      leave() { running = false; cancelAnimationFrame(raf); }
     };
   })();
 
@@ -141,6 +144,22 @@
     }
     pick.querySelectorAll('.class-btn').forEach(b => b.addEventListener('click', () => start(b.dataset.class)));
     hooks['s-sampler'] = { leave() { if (running) { running.stop(); running = null; } showPick(); } };
+  })();
+
+  /* If You Do Not Play: rain, grey, sobbing, violin */
+  (function () {
+    const sad = document.getElementById('s-sad');
+    const tears = document.getElementById('tears');
+    let t = 0;
+    function tear() {
+      const d = document.createElement('span'); d.className = 'tear';
+      d.style.left = (44 + Math.random() * 12) + '%';
+      tears.appendChild(d); setTimeout(() => d.remove(), 2600);
+    }
+    hooks['s-sad'] = {
+      enter() { sad.classList.remove('replay'); void sad.offsetWidth; sad.classList.add('replay'); SFX.sadStart(); t = setInterval(tear, 700); },
+      leave() { SFX.sadStop(); clearInterval(t); tears.innerHTML = ''; }
+    };
   })();
 
   /* The Ask: accept quest */
