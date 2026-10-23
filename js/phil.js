@@ -4,25 +4,17 @@
     return `
 <svg class="phil ${cls || ''}" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-label="Phil, doing something dumb">
   <g class="run">
-    <!-- legs -->
     <path d="M42 86 L38 112 M58 86 L62 112" stroke="#3a2a20" stroke-width="7" stroke-linecap="round" fill="none"/>
     <path d="M33 113 h12 M57 113 h12" stroke="#1d1410" stroke-width="5" stroke-linecap="round"/>
-    <!-- torso -->
     <path d="M38 52 h24 l4 36 h-32 z" fill="#6b2a2a" stroke="#3a1414" stroke-width="2"/>
     <path d="M50 52 v36" stroke="#8a3a3a" stroke-width="2"/>
-    <!-- arms -->
     <g class="arm-l"><path d="M38 56 L24 78" stroke="#6b2a2a" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="23" cy="80" r="4.5" fill="#e8b89a"/></g>
     <g class="arm-r hand"><path d="M62 56 L76 78" stroke="#6b2a2a" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="77" cy="80" r="4.5" fill="#e8b89a"/></g>
-    <!-- head -->
     <circle cx="50" cy="36" r="16" fill="#e8b89a" stroke="#8a6248" stroke-width="1.5"/>
-    <!-- hair, flat -->
     <path d="M34 32 q16 -14 32 0 q-2 -10 -16 -12 q-14 2 -16 12 z" fill="#3a2a20"/>
-    <!-- beard, patchy -->
     <path d="M38 42 q12 14 24 0 q-2 10 -12 11 q-10 -1 -12 -11 z" fill="#4a3528" opacity=".9"/>
-    <!-- eyes: half lidded, unimpressed -->
     <path d="M42 36 h6 M52 36 h6" stroke="#2a1a10" stroke-width="2.2" stroke-linecap="round"/>
     <path d="M41 33 h8 M51 33 h8" stroke="#3a2a20" stroke-width="1.5"/>
-    <!-- mouth: flat -->
     <path d="M45 46 h10" stroke="#5a3a2a" stroke-width="1.8" stroke-linecap="round"/>
   </g>
   ${extra}
@@ -100,22 +92,40 @@ ${bubble('mine?', 40)}`, 'phil-horse'),
 <circle cx="50" cy="70" r="12" fill="none" stroke="#9b1c1c" stroke-width="2" opacity=".6"/>
 <circle cx="50" cy="70" r="5" fill="none" stroke="#9b1c1c" stroke-width="2" opacity=".6"/>`, 'phil-dummy'),
 
-    pen: () => body(`
-<g class="pen" transform="translate(74,78)">
-  <path d="M0 0 l14 -18" stroke="#2b1b0e" stroke-width="3" stroke-linecap="round"/>
-  <path d="M0 0 l-3 4" stroke="#8a6520" stroke-width="3" stroke-linecap="round"/>
-</g>
-<path d="M60 96 q6 -6 12 0 q6 6 12 0" fill="none" stroke="#2b1b0e" stroke-width="1.2"/>
-<text x="66" y="110" font-family="IM Fell English" font-size="7" font-style="italic" fill="#2b1b0e">x (phil)</text>`, 'phil-pen'),
-
     german: () => body(bubble('LAUTER!', 58), 'phil-german'),
 
-    sentence: () => body(`
-<g transform="translate(62,2)">
-  <rect x="0" y="0" width="34" height="20" rx="6" fill="#2a120c" stroke="#8a6520"/>
-  <path d="M8 20 l-4 7 l10 -7 z" fill="#2a120c" stroke="#8a6520"/>
-  <text class="dots" x="17" y="14" text-anchor="middle" font-family="Cinzel" font-size="11" font-weight="900" fill="#f3d680">oi.</text>
-</g>`, 'phil-sentence'),
+    cow: () => body(`
+<g class="horns" transform="translate(50,22)">
+  <path d="M-16 0 q-10 -4 -14 -14 q6 2 10 10 M16 0 q10 -4 14 -14 q-6 2 -10 10" fill="#d9c7a0" stroke="#8a6520" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M-14 2 h28" stroke="#8a6520" stroke-width="2" stroke-dasharray="3 2"/>
+</g>
+${bubble('moo?', 36)}`, 'phil-cow'),
+
+    cook: () => body(`
+<g transform="translate(84,66)">
+  <path d="M-8 14 L10 -14" stroke="#4a2a14" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M6 -22 h10 v8 l6 6 h-14 z" fill="#1d1410" stroke="#000"/>
+</g>
+<g transform="translate(60,28) scale(.55)">${flames}</g>`, 'phil-cook'),
+
+    rain: () => body(`
+<g class="drop" ><path d="M12 10 v6" stroke="#8fb8e8" stroke-width="2" stroke-linecap="round"/></g>
+<g class="drop d2"><path d="M30 6 v6" stroke="#8fb8e8" stroke-width="2" stroke-linecap="round"/></g>
+<g class="drop d3"><path d="M88 8 v6" stroke="#8fb8e8" stroke-width="2" stroke-linecap="round"/></g>
+<g class="drop d4"><path d="M70 4 v6" stroke="#8fb8e8" stroke-width="2" stroke-linecap="round"/></g>
+<g class="drop d5"><path d="M50 2 v6" stroke="#8fb8e8" stroke-width="2" stroke-linecap="round"/></g>
+<g transform="translate(78,40)">
+  <path d="M0 0 v30" stroke="#2b1b0e" stroke-width="2"/>
+  <path d="M-16 0 q16 18 32 0 z" fill="#9b1c1c" stroke="#5d0f0f"/>
+  <path class="water" d="M-13 2 q13 12 26 0 z" fill="#8fb8e8" opacity=".85"/>
+</g>`, 'phil-rain'),
+
+    scroll: () => body(`
+<g class="scroll" transform="translate(16,70) rotate(180)">
+  <rect x="-14" y="-10" width="28" height="22" fill="#f3d680" stroke="#8a6520"/>
+  <path d="M-10 -5 h20 M-10 0 h16 M-10 5 h18" stroke="#2b1b0e" stroke-width="1.5"/>
+</g>
+${bubble('huh.', 34)}`, 'phil-scroll'),
 
     button: () => body(`
 <g transform="translate(80,74)">

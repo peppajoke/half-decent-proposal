@@ -30,7 +30,7 @@
       const o = slides[old];
       o.classList.remove('active'); o.classList.add('leaving');
       setTimeout(() => o.classList.remove('leaving'), 320);
-      if (hooks[old] && hooks[old].leave) hooks[old].leave();
+      if (hooks[o.id] && hooks[o.id].leave) hooks[o.id].leave();
     }
     cur = i;
     s.classList.add('active');
@@ -44,7 +44,7 @@
     clealine.textContent = s.dataset.clea;
     clealine.style.animation = 'none'; void clealine.offsetWidth; clealine.style.animation = '';
     history.replaceState(null, '', '#' + (i + 1));
-    if (hooks[i] && hooks[i].enter) hooks[i].enter();
+    if (hooks[s.id] && hooks[s.id].enter) hooks[s.id].enter();
     setTimeout(() => { busy = false; }, 350);
   }
 
@@ -70,7 +70,7 @@
   }, { passive: true });
   document.addEventListener('pointerdown', () => SFX.unlock(), { once: true });
 
-  /* Slide 2: the raid wipe */
+  /* The Problem: the party wipes once and stays wiped. */
   (function () {
     const wipe = document.getElementById('wipe');
     const raiders = Array.from(wipe.querySelectorAll('.raider'));
@@ -78,51 +78,50 @@
     const base = Math.floor((Date.now() - Date.UTC(2026, 5, 1)) / 600000) + 1337;
     let count = base, timer = 0, raf = 0, running = false;
     countEl.textContent = count.toLocaleString();
-    const rates = [9, 11, 24];
+    const rates = [16, 18, 30];
     function run() {
-      let hp = [100, 100, 100], dead = [false, false, false], last = null, hold = 0;
+      let hp = [100, 100, 100], dead = [false, false, false], last = null;
       raiders.forEach(r => { r.querySelector('.status').textContent = ''; r.querySelector('.hpfill').style.width = '100%'; });
       wipe.classList.remove('dead');
       function step(ts) {
         if (!running) return;
         if (last == null) last = ts; const dt = Math.min(0.05, (ts - last) / 1000); last = ts;
-        if (hold > 0) { hold -= dt; if (hold <= 0) { run(); return; } raf = requestAnimationFrame(step); return; }
         let allDead = true;
         for (let i = 0; i < 3; i++) {
           if (dead[i]) continue; allDead = false;
           hp[i] -= rates[i] * dt * (0.7 + Math.random() * 0.8);
-          if (hp[i] <= 0) { hp[i] = 0; dead[i] = true; raiders[i].querySelector('.status').textContent = ['Dead (pulled)', 'Dead (spreadsheet)', 'Dead (fire)'][i]; SFX.death(); count++; countEl.textContent = count.toLocaleString(); }
+          if (hp[i] <= 0) { hp[i] = 0; dead[i] = true; raiders[i].querySelector('.status').textContent = 'Dead'; SFX.death(); count++; countEl.textContent = count.toLocaleString(); }
           raiders[i].querySelector('.hpfill').style.width = hp[i] + '%';
         }
-        if (allDead) { wipe.classList.add('dead'); hold = 1.8; }
+        if (allDead) { wipe.classList.add('dead'); return; }
         raf = requestAnimationFrame(step);
       }
       raf = requestAnimationFrame(step);
     }
-    hooks[1] = {
+    hooks['s-problem'] = {
       enter() { running = true; run(); timer = setInterval(() => { count++; countEl.textContent = count.toLocaleString(); }, 1400); },
       leave() { running = false; cancelAnimationFrame(raf); clearInterval(timer); }
     };
   })();
 
-  /* Slide 6: shapeshift cycle and the zoo */
+  /* Ranch Mode: shapeshift cycle and the zoo */
   (function () {
     const ss = document.getElementById('shapeshift');
-    const forms = [['tauren', 'Tauren'], ['bear', 'Bear'], ['cat', 'Cat'], ['stag', 'Stag'], ['tree', 'Tree'], ['tauren', 'Tauren, healing']];
-    ss.innerHTML = forms.map(([k, l], i) => `<div class="form ${i === 0 ? 'on' : ''}" data-i="${i}">${Icons[k]}</div>`).join('') + '<span class="form-label">Tauren</span>';
+    const forms = [['tauren', 'Tauren'], ['bear', 'Bear Form'], ['cat', 'Cat Form'], ['cheetah', 'Travel Form'], ['seal', 'Aquatic Form'], ['moonkin', 'Moonkin Form'], ['heal', 'Tauren, healing']];
+    ss.innerHTML = forms.map(([k], i) => `<div class="form ${i === 0 ? 'on' : ''}" data-i="${i}">${Icons[k]}</div>`).join('') + '<span class="form-label">Tauren</span>';
     const label = ss.querySelector('.form-label');
     const nodes = ss.querySelectorAll('.form');
     let idx = 0, t = 0;
-    hooks[5] = {
+    hooks['s-ranch'] = {
       enter() { t = setInterval(() => { nodes[idx].classList.remove('on'); idx = (idx + 1) % forms.length; nodes[idx].classList.add('on'); label.textContent = forms[idx][1]; }, 1300); },
       leave() { clearInterval(t); }
     };
     const zoo = document.getElementById('zoo');
-    const pets = [['wolf', 'Wolf'], ['bear', 'Bear'], ['cat', 'Cat'], ['boar', 'Boar'], ['raptor', 'Raptor'], ['spider', 'Gentle'], ['turtle', 'Turtle'], ['owl', 'Owl']];
+    const pets = [['wolf', 'Wolf'], ['bear', 'Bear'], ['cat', 'Cat'], ['boar', 'Boar'], ['raptor', 'Raptor'], ['spider', 'Gentle'], ['turtle', 'Turtle'], ['owl', 'Owl'], ['fox', 'Fox, new'], ['horse', 'No']];
     zoo.innerHTML = pets.map(([k, n]) => `<div class="pet" title="${n}">${Icons[k]}<span>${n}</span></div>`).join('');
   })();
 
-  /* Slide 7: the sampler */
+  /* The sampler */
   (function () {
     const pick = document.getElementById('classpick'), gameEl = document.getElementById('game'), scoreEl = document.getElementById('score');
     let running = null;
@@ -141,10 +140,10 @@
       });
     }
     pick.querySelectorAll('.class-btn').forEach(b => b.addEventListener('click', () => start(b.dataset.class)));
-    hooks[6] = { leave() { if (running) { running.stop(); running = null; } showPick(); } };
+    hooks['s-sampler'] = { leave() { if (running) { running.stop(); running = null; } showPick(); } };
   })();
 
-  /* Slide 11: accept quest */
+  /* The Ask: accept quest */
   (function () {
     const btn = document.getElementById('accept'), reveal = document.getElementById('reveal');
     const canvas = document.getElementById('confetti'), ctx = canvas.getContext('2d');

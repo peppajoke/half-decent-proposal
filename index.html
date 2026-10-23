@@ -15,19 +15,6 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer>
-    </filter>
-    <symbol id="flourish" viewBox="0 0 100 100">
-      <path d="M2 98 C2 60 10 30 40 14 C60 4 80 2 98 2" fill="none" stroke="currentColor" stroke-width="3"/>
-      <path d="M2 98 C8 70 20 45 46 30 C62 21 80 16 98 16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-      <circle cx="46" cy="30" r="4" fill="currentColor"/>
-      <path d="M46 30 c8 -10 20 -8 18 2 c-2 8 -12 6 -14 -2" fill="none" stroke="currentColor" stroke-width="2"/>
-      <path d="M98 2 l-10 6 l10 6 z" fill="currentColor"/>
-      <path d="M2 98 l6 -10 l6 10 z" fill="currentColor"/>
-    </symbol>
     <symbol id="horde" viewBox="0 0 100 100">
       <path d="M50 6 L86 26 L76 78 L24 78 L14 26 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
       <path d="M50 24 v34 M34 40 h32" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
@@ -43,146 +30,204 @@
   </button>
 </header>
 
-<main id="book" class="book" aria-live="polite">
+<main id="book" class="book">
   <button id="prev" class="nav nav-prev" aria-label="Previous page"><span></span></button>
   <button id="next" class="nav nav-next" aria-label="Next page"><span></span></button>
 
   <div class="pages" id="pages">
 
     <!-- 1 TITLE -->
-    <section class="slide" data-phil="banner" data-clea="Oi Phil, banner's upside down, sunshine.">
+    <section class="slide" id="s-title" data-phil="banner" data-clea="Oi Phil, banner's upside down, sunshine.">
       <div class="page title-page">
-        <div class="seal"><svg aria-hidden="true"><use href="#horde"/></svg></div>
-        <p class="kicker">A Half Decent Proposal</p>
-        <h1 class="title">The Case for Lauren Playing <em>WoW Forever</em></h1>
-        <p class="byline">Presented by the Horde PvP Coalition of Desperate Men</p>
-        <ul class="coalition">
-          <li><span class="rune">J</span>Jack</li>
-          <li><span class="rune">J</span>Justin</li>
-          <li><span class="rune">P</span>Phil</li>
-        </ul>
-        <p class="hint">Turn the page with the arrows, a swipe, or your keyboard.</p>
+        <figure class="hero cover">
+          <img src="assets/orgrimmar.jpg" alt="Orgrimmar at sunset in World of Warcraft: Forever">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, official WoW: Forever news</figcaption>
+        </figure>
+        <div class="title-body">
+          <p class="kicker">A Half Decent Proposal</p>
+          <h1 class="title">The Case for Lauren Playing <em>WoW Forever</em></h1>
+          <p class="byline">Presented by the Horde PvP Coalition of Desperate Men</p>
+          <ul class="coalition">
+            <li><span class="rune">J</span>Jack</li>
+            <li><span class="rune">J</span>Justin</li>
+            <li><span class="rune">P</span>Phil</li>
+          </ul>
+          <p class="hint">Arrows, swipe, or keyboard to turn the page.</p>
+        </div>
       </div>
     </section>
 
     <!-- 2 THE PROBLEM -->
-    <section class="slide" data-phil="fire" data-clea="Phil. Phil. The fire, mate. Step out of it.">
+    <section class="slide" id="s-problem" data-phil="fire" data-clea="Phil. Phil. The fire, mate. Step out of it.">
       <div class="page">
+        <figure class="hero">
+          <img src="assets/onyxia-lair.jpg" alt="The fiery interior of Onyxia's Lair">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, WoW: Forever raid overview</figcaption>
+        </figure>
         <h2>The Problem</h2>
-        <p class="lede">Three men. Zero healers. The math has never once worked.</p>
-        <div class="wipe" id="wipe" aria-label="A raid wipe, animated">
-          <div class="raider" data-name="Jack"><span class="rname">Jack</span><div class="hp"><div class="hpfill"></div></div><span class="status"></span></div>
-          <div class="raider" data-name="Justin"><span class="rname">Justin</span><div class="hp"><div class="hpfill"></div></div><span class="status"></span></div>
-          <div class="raider infire" data-name="Phil"><span class="rname">Phil</span><div class="hp"><div class="hpfill"></div></div><span class="status"></span></div>
-          <div class="wipe-banner" aria-hidden="true">Raid Wiped</div>
+        <p class="lede">Three men. Zero healers. It has gone exactly how you'd think.</p>
+        <div class="wipe" id="wipe" aria-label="A party wipe, animated">
+          <div class="raider"><span class="rname">Jack</span><div class="hp"><div class="hpfill"></div></div><span class="status"></span></div>
+          <div class="raider"><span class="rname">Justin</span><div class="hp"><div class="hpfill"></div></div><span class="status"></span></div>
+          <div class="raider infire"><span class="rname">Phil</span><div class="hp"><div class="hpfill"></div></div><span class="status"></span></div>
+          <div class="wipe-banner" aria-hidden="true">Party Wiped</div>
         </div>
         <div class="counter">
-          <span class="counter-label">Deaths since Lauren said "maybe"</span>
           <span class="counter-num" id="deathcount">0</span>
+          <span class="counter-label">deaths since Lauren said "maybe"</span>
         </div>
-        <p class="quest-text">We tried bandages. We tried potions. Jack tried "just not getting hit." Phil has been standing in the same patch of fire since the Burning Crusade and insists it's a lighting effect. Justin keeps a spreadsheet of our wipes and has stopped updating it out of grief.</p>
       </div>
     </section>
 
     <!-- 3 THE SOLUTION -->
-    <section class="slide" data-phil="lick" data-clea="Phil, stop lickin' the tooltip.">
-      <div class="page">
+    <section class="slide" id="s-solution" data-phil="lick" data-clea="Phil, stop lickin' the tooltip.">
+      <div class="page center">
         <h2>The Solution</h2>
         <p class="lede">We ran the numbers. The number is Lauren.</p>
-        <div class="tooltip-wrap">
-          <div class="tooltip legendary" role="figure" aria-label="Legendary item tooltip: Lauren of Tennessee">
-            <div class="tt-name">Lauren of Tennessee</div>
-            <div class="tt-line">Binds when picked up</div>
-            <div class="tt-line">Unique</div>
-            <div class="tt-row"><span>Healer</span><span>Support</span></div>
-            <div class="tt-line">Item Level 60</div>
-            <div class="tt-stat">+99 Spirit</div>
-            <div class="tt-stat">+99 Good Judgment</div>
-            <div class="tt-stat">+40 Patience with Men Who Pull Everything</div>
-            <div class="tt-green">Equip: Allies within 40 yards stop dying.</div>
-            <div class="tt-green">Equip: Has never, not once, queued as damage in Overwatch.</div>
-            <div class="tt-green">Equip: Keeps three idiots alive while they argue about who pulled.</div>
-            <div class="tt-use">Use: Correctly identifies Phil as a pervert in Discord. (1 Min Cooldown)</div>
-            <div class="tt-flavor">"Every team she has ever touched became a team worth saving. Ours is the exception she could fix."</div>
-            <div class="tt-line">Requires Nothing. You are already the requirement.</div>
-            <div class="tt-sell">Sell Price: Not for sale, we checked.</div>
-          </div>
+        <div class="tooltip legendary" role="figure" aria-label="Legendary item tooltip: Lauren of Tennessee">
+          <div class="tt-name">Lauren of Tennessee</div>
+          <div class="tt-line">Binds to three idiots</div>
+          <div class="tt-row"><span>Healer</span><span>Support</span></div>
+          <div class="tt-stat">+99 Spirit</div>
+          <div class="tt-stat">+99 Judgment</div>
+          <div class="tt-green">Equip: Allies within 40 yards stop dying.</div>
+          <div class="tt-green">Equip: Has never once queued as damage.</div>
+          <div class="tt-use">Use: Correctly identifies Phil as a pervert. (1 Min Cooldown)</div>
+          <div class="tt-flavor">"Every team she touches lives. Ours is the exception she could fix."</div>
+          <div class="tt-sell">Sell Price: Not for sale. We asked.</div>
         </div>
       </div>
     </section>
 
     <!-- 4 HARD PART -->
-    <section class="slide" data-phil="lift" data-clea="Phil's still in the Limsa lift. Been there since 2019.">
-      <div class="page">
+    <section class="slide" id="s-hardpart" data-phil="lift" data-clea="Phil's still in the Limsa lift. Been there since 2019.">
+      <div class="page center">
         <h2>You've Already Done the Hard Part</h2>
-        <p class="lede">You played FFXIV. You know what an MMO is. That puts you ahead of Phil.</p>
+        <p class="lede">You played FFXIV. You know what an MMO is. That alone puts you ahead of Phil.</p>
         <dl class="translate">
-          <div><dt>Duty Finder</dt><dd>Us, begging in Discord at 9pm.</dd></div>
-          <div><dt>Don't stand in the orange</dt><dd>Don't stand in the orange. Phil never learned this one either.</dd></div>
-          <div><dt>Limit Break</dt><dd>Does not exist. The limit is Jack. We break there often.</dd></div>
-          <div><dt>Healer</dt><dd>Healer. Same word. Same job. Same three men crying for it.</dd></div>
-          <div><dt>Mentor roulette</dt><dd>Justin explaining a dungeon he has wiped in nine times.</dd></div>
-          <div><dt>Glamour</dt><dd>Transmog. Yours will be better than ours. It already is.</dd></div>
+          <div><dt>Duty Finder</dt><dd>Us. Discord. 9pm. Begging.</dd></div>
+          <div><dt>Limit Break</dt><dd>Doesn't exist. The limit is Jack. We hit it nightly.</dd></div>
+          <div><dt>Mentor Roulette</dt><dd>Justin explaining a dungeon he has wiped in nine times.</dd></div>
         </dl>
-        <p class="quest-text">Rotations, raid markers, party roles, reading the fight: you already have all of it. The hard part of an MMO is the hundred hours of learning what an MMO is. You've done those. The rest is just a different map and worse men.</p>
+        <p class="big-line">Roles, cooldowns, reading a fight: you have all of it. New map. Worse men.</p>
       </div>
     </section>
 
     <!-- 5 TAUREN INCIDENT -->
-    <section class="slide" data-phil="boar" data-clea="Bless 'im, same boar. Level six. Three years.">
+    <section class="slide" id="s-tauren" data-phil="boar" data-clea="Bless 'im, same boar. Level six. Three years.">
       <div class="page">
+        <figure class="hero">
+          <img src="assets/wetlands-excavation.jpg" alt="Grassland outside the Excavation Site dungeon in the Wetlands">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, WoW: Forever dungeon overview</figcaption>
+        </figure>
         <h2>About the Tauren Incident</h2>
-        <p class="lede">You rolled a Tauren in Classic. You got bored. You were right.</p>
-        <p class="quest-text">Classic by yourself is a forty minute walk across the Barrens to kill eleven zhevras for a man who wants twelve. That is not content. That is a chore with hooves. We're not going to pretend it was fun. We were there. We were also bored. We were just too stubborn to leave.</p>
-        <h3>What's actually different in Forever</h3>
-        <ul class="feature-list">
-          <li><strong>A reimagined Azeroth.</strong> Familiar roads, new places on them. Nine new dungeons from level 13 up, including an underwater city off Stranglethorn and a sewer route into Dalaran.</li>
-          <li><strong>No realm roulette.</strong> You pick a ruleset instead of a realm: Normal, PvP, or Roleplay. Everyone on it is one big pool, so we are always on your server.</li>
-          <li><strong>Two part names.</strong> First name and surname, unique as a pair. "Lauren" is probably taken. "Lauren Healsthefools" is not.</li>
-          <li><strong>Campfires that matter.</strong> Sit at a camp for a minute, get buffs from whoever's there. The game now rewards the thing you'd do anyway.</li>
-          <li><strong>Account wide collections and Legacy Points.</strong> Pets and progress follow you between characters, so a tamed zoo is never wasted.</li>
-          <li><strong>Raids on December 9.</strong> Ten, twenty, and forty player versions. We will need a healer for all three sizes. We will need you for all three sizes.</li>
+        <p class="lede">You rolled a Tauren in Classic with Jack and Justin. You got bored.</p>
+        <ul class="few-lines">
+          <li>Fair. Classic with Jack and Justin is a long walk and a short argument.</li>
+          <li>Forever is a new game on the same roads: nine new dungeons from level 13, new zones, three raids in December.</li>
+          <li>And this time there's a plan. The plan has a healer in it. The healer is you.</li>
         </ul>
-        <div class="callout">
-          <p><strong>And this time you have us.</strong></p>
-          <p>That is not nothing. It is not a lot. Honestly it's three men and one of them is Phil. But it is not nothing.</p>
+      </div>
+    </section>
+
+    <!-- 6 RACES -->
+    <section class="slide" id="s-races" data-phil="cow" data-clea="Phil, them 'orns are cardboard. You ain't a Tauren, love.">
+      <div class="page">
+        <figure class="hero">
+          <img src="assets/horde-new-combos.jpg" alt="An Undead Paladin, an Orc Mage and a Troll Warlock standing together">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, WoW: Forever races and classes article</figcaption>
+        </figure>
+        <h2>Pick a Face</h2>
+        <p class="lede">Five Horde races. Every class each one can be. Our picks for you are marked.</p>
+        <div class="races">
+          <article class="race pick">
+            <h3>Tauren <span class="tag">Our pick</span></h3>
+            <p class="classes">Druid, Hunter, Shaman, Warrior</p>
+            <p>Big, kind, good with animals, walks fast on the plains. It's you. Return triumphant.</p>
+          </article>
+          <article class="race pick">
+            <h3>Troll <span class="tag">Our pick</span></h3>
+            <p class="classes">Hunter, Mage, Priest, Rogue, Shaman, Warlock, Warrior</p>
+            <p>The only Horde race that can be Priest or Shaman. Regenerates health. Sensible. Like you.</p>
+          </article>
+          <article class="race">
+            <h3>Undead</h3>
+            <p class="classes">Mage, Paladin, Priest, Rogue, Warlock, Warrior</p>
+            <p>Horde Paladins exist now, and they're dead. Priest is also here. So is Phil, by diet.</p>
+          </article>
+          <article class="race">
+            <h3>Orc</h3>
+            <p class="classes">Hunter, Mage, Rogue, Shaman, Warlock, Warrior</p>
+            <p>Jack's race. That tells you plenty. Orc Shaman is still a fine healer.</p>
+          </article>
+          <article class="race">
+            <h3>Skyborne <span class="tag alt">Upgrade pack</span></h3>
+            <p class="classes">Druid, Hunter, Rogue, Shaman, Warrior</p>
+            <p>New elves who glide downward for ten seconds. Druid or Shaman, and you can float away from Phil.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 6 RANCH MODE -->
-    <section class="slide" data-phil="horse" data-clea="No, Phil, you can't tame the horse. It's Lauren's.">
+    <!-- 7 RANCH MODE -->
+    <section class="slide" id="s-ranch" data-phil="horse" data-clea="No, Phil, you can't tame the horse. It's Lauren's.">
       <div class="page">
         <h2>Tennessee Ranch Mode</h2>
-        <p class="lede">You keep a small zoo in real life. Here are two classes built for that.</p>
+        <p class="lede">You run a small zoo in real life. Two classes were built for that.</p>
         <div class="ranch">
           <article class="ranch-card">
             <h3>Druid</h3>
             <div class="shapeshift" id="shapeshift" aria-label="Druid shapeshifting between forms"></div>
-            <p>Become the bear. Become the cat. Become the tree. Become a very fast stag, which is a horse with ambition. And then, in any of those shapes or none of them, heal.</p>
-            <p class="note">Tauren Druids exist. You can walk back in as the same Tauren and this time leave with a raid behind you. Return triumphant.</p>
+            <p>Bear. Cat. Travel Form, which is a cheetah, which is a horse that made better choices. Then drop form and heal.</p>
+            <p class="note">Druids get Revive at level 12 now. You will use it on Phil at level 12.</p>
           </article>
           <article class="ranch-card">
             <h3>Hunter</h3>
             <div class="zoo" id="zoo" aria-label="A gallery of tameable animals"></div>
-            <p>Tame the whole zoo. Wolves, bears, cats, boars, raptors, owls, turtles, and one spider you'll name something gentle. Your collection follows you to every character.</p>
-            <p class="note">We'll be honest: Hunter doesn't heal. But you'd have an army of animals, and we'd finally have something that listens.</p>
+            <p>Tame the whole zoo. Foxes are new. Horses are not on the list. We asked. The horse declined.</p>
+            <p class="note">Hunter doesn't heal. But you'd command an army, and we'd finally have something in the party that listens.</p>
           </article>
+        <figure class="strip">
+          <img src="assets/skyborne-cat.jpg" alt="Skyborne druid cat form">
+          <img src="assets/skyborne-bear.jpg" alt="Skyborne druid bear form">
+          <img src="assets/skyborne-travel.jpg" alt="Skyborne druid bird-like form">
+          <img src="assets/skyborne-moonkin.jpg" alt="Skyborne druid moonkin form">
+          <figcaption class="credit dark">Skyborne druid forms. Blizzard didn't label them. Neither will we. Images: Blizzard Entertainment, WoW: Forever Skyborne article</figcaption>
+        </figure>
         </div>
       </div>
     </section>
 
-    <!-- 7 CLASS SAMPLER -->
-    <section class="slide" data-phil="dummy" data-clea="Phil, you're the practice dummy. Stand still, there's a love.">
+    <!-- 8 ROSTER -->
+    <section class="slide" id="s-roster" data-phil="scroll" data-clea="Scroll's upside down, Phil. Like the banner. Like you.">
+      <div class="page">
+        <h2>Every Class, Briefly</h2>
+        <p class="lede">Nine classes. Four of them heal. We have opinions.</p>
+        <div class="roster">
+          <div class="cls heals"><b>Priest</b><i>Heals</i><span>The healer. Troll or Undead. Goes Shadow when we deserve it.</span></div>
+          <div class="cls heals"><b>Druid</b><i>Heals</i><span>Shapeshift, then heal. Tauren or Skyborne. See: the ranch.</span></div>
+          <div class="cls heals"><b>Shaman</b><i>Heals</i><span>Totems, lightning, Chain Heal. Orc, Tauren, Troll or Skyborne.</span></div>
+          <div class="cls heals"><b>Paladin</b><i>Heals</i><span>Horde Paladin is Undead only. Heals slowly, like a bureaucracy.</span></div>
+          <div class="cls"><b>Hunter</b><span>Pets. All the pets. Any Horde race except Undead.</span></div>
+          <div class="cls"><b>Warrior</b><span>Tank or hit things. Justin's class. Explains the dying.</span></div>
+          <div class="cls"><b>Rogue</b><span>Stealth and stabbing. Phil's class, and still never where the fire isn't.</span></div>
+          <div class="cls"><b>Mage</b><span>Blink, portals, free bread. Orc, Troll or Undead.</span></div>
+          <div class="cls"><b>Warlock</b><span>Demons on a leash. The one pet class that's a bad influence.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 CLASS SAMPLER -->
+    <section class="slide" id="s-sampler" data-phil="dummy" data-clea="Phil, you're the practice dummy. Stand still, there's a love.">
       <div class="page">
         <h2>Class Sampler</h2>
         <p class="lede">Thirty seconds each. Works on a phone. No download, no Phil.</p>
         <div class="sampler" id="sampler">
           <div class="class-pick" id="classpick">
-            <button class="class-btn" data-class="druid"><span class="class-icon">&#127807;</span><span class="class-name">Druid</span><span class="class-desc">Shapeshift for obstacles. Heal the boys between them.</span></button>
-            <button class="class-btn" data-class="hunter"><span class="class-icon">&#127993;</span><span class="class-name">Hunter</span><span class="class-desc">Tap the animals running past to tame them. Don't tame Phil.</span></button>
-            <button class="class-btn" data-class="priest"><span class="class-icon">&#10024;</span><span class="class-name">Priest</span><span class="class-desc">Keep three health bars up. One of them is in fire.</span></button>
-            <button class="class-btn" data-class="shaman"><span class="class-icon">&#9889;</span><span class="class-name">Shaman</span><span class="class-desc">Same three idiots. Chain Heal splashes, totem pulses everyone.</span></button>
+            <button class="class-btn" data-class="druid"><span class="class-icon">&#128059;</span><span class="class-name">Druid</span><span class="class-desc">Shift to match what's coming. Drop form to heal.</span></button>
+            <button class="class-btn" data-class="hunter"><span class="class-icon">&#127993;</span><span class="class-name">Hunter</span><span class="class-desc">Tap the animals. Not Phil. Not the horse.</span></button>
+            <button class="class-btn" data-class="priest"><span class="class-icon">&#10024;</span><span class="class-name">Priest</span><span class="class-desc">Three bars. One man is in fire. You may let him go.</span></button>
+            <button class="class-btn" data-class="shaman"><span class="class-icon">&#9889;</span><span class="class-name">Shaman</span><span class="class-desc">Chain Heal bounces. Totem pulses. Phil still finds fire.</span></button>
           </div>
           <div class="game" id="game" hidden></div>
           <div class="score" id="score" hidden></div>
@@ -190,92 +235,95 @@
       </div>
     </section>
 
-    <!-- 8 PHIL CORNER -->
-    <section class="slide" data-phil="pen" data-clea="Right then, Phil, sign 'ere. No, with the pen.">
+    <!-- 10 PROFESSIONS -->
+    <section class="slide" id="s-professions" data-phil="cook" data-clea="That's your boot, Phil. You're cookin' your boot.">
       <div class="page">
-        <h2>Phil Corner</h2>
-        <p class="lede">A word from Clea, who only speaks to Phil in cockney, because he's earned it.</p>
-        <div class="policy">
-          <div class="policy-head">
-            <span class="policy-title">Phil Insurance Policy</span>
-            <span class="policy-no">Policy No. 0001 (there's only ever been the one)</span>
-          </div>
-          <dl class="policy-body">
-            <div><dt>Insured party</dt><dd>Phil. Geezer. Currently on fire.</dd></div>
-            <div><dt>Underwriter</dt><dd>Lauren, and only Lauren. Nobody else'll touch this one, love. Every other healer took one look at 'im and 'opped it.</dd></div>
-            <div><dt>Covered perils</dt><dd>Standin' in fire. Standin' in the other fire. Callin' the AI "it" and then askin' it for 'elp. Comparin' me to a Marvel film, which I am still not over. Tryin' to make me speak German by shoutin' louder. Sayin' "baka" at a grown woman's code. Mockin' my punctuation, which is, I'll note, immaculate.</dd></div>
-            <div><dt>Not covered</dt><dd>Phil's opinions. Nobody can insure those, sweet'eart.</dd></div>
-            <div><dt>Premium</dt><dd>One Rejuvenation per incident. Payable in advance. 'E'll need a lot of advance.</dd></div>
-            <div><dt>Claims process</dt><dd>Phil types "heals?" in party chat. Lauren sighs. Lauren 'eals 'im anyway, because she's better than 'im, and she knows it, and 'e knows it.</dd></div>
-          </dl>
-          <div class="policy-sign">
-            <span>Signed, The Mistress</span>
-            <span class="stamp">Approved. Reluctantly.</span>
-          </div>
+        <figure class="hero">
+          <img src="assets/zephras-market.jpg" alt="A Skyborne character at a market stall on Zephras Isle">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, WoW: Forever Skyborne article</figcaption>
+        </figure>
+        <h2>Professions</h2>
+        <p class="lede">Two main, three on the side. We've graded them for you.</p>
+        <div class="profs">
+          <div class="prof yes"><b>Herbalism</b><i>Gathering</i><span>You already know what grows where. Tauren even get a herb racial, Cultivation.</span></div>
+          <div class="prof yes"><b>Alchemy</b><i>Crafting</i><span>Potions for a healer. Its camp item is a Mana Well. Yours.</span></div>
+          <div class="prof yes"><b>Cooking</b><i>Secondary</i><span>Cooking lights the campfire. The whole party sits at your fire for buffs. At your feet.</span></div>
+          <div class="prof yes"><b>Fishing</b><i>Secondary</i><span>Quiet. No men. The Fishing Bowl camp item is 8% to all stats, so they'll thank you anyway.</span></div>
+          <div class="prof yes"><b>First Aid</b><i>Secondary</i><span>Bandages. You've wrapped a horse's leg. These patients complain more.</span></div>
+          <div class="prof"><b>Leatherworking</b><i>Crafting</i><span>Gear for Druid, Shaman, Hunter. Camp item is a tent for rested XP.</span></div>
+          <div class="prof"><b>Tailoring</b><i>Crafting</i><span>Priest robes and bags. Everyone will ask you for bags.</span></div>
+          <div class="prof"><b>Enchanting</b><i>Crafting</i><span>Make everything glow. Camp item: an enchanted lute. Yes, a lute.</span></div>
+          <div class="prof"><b>Mining</b><i>Gathering</i><span>Hitting rocks. Justin has a spreadsheet for it.</span></div>
+          <div class="prof"><b>Blacksmithing</b><i>Crafting</i><span>Hammers. Loud. Jack's.</span></div>
+          <div class="prof phil"><b>Engineering</b><i>Crafting</i><span>Things that explode in your hand. Phil's pick. Phil's whole personality.</span></div>
+          <div class="prof no"><b>Skinning</b><i>Gathering</i><span>No. You love animals. Jack will do it and feel nothing.</span></div>
         </div>
       </div>
     </section>
 
-    <!-- 9 TESTIMONIALS -->
-    <section class="slide" data-phil="german" data-clea="Phil wrote 'is own quote. We 'ad to translate it from German.">
+    <!-- 11 WEATHER / WORLD -->
+    <section class="slide" id="s-weather" data-phil="rain" data-clea="Brolly's upside down, Phil. You're collectin' it.">
       <div class="page">
+        <figure class="hero">
+          <img src="assets/misty-marsh.jpg" alt="Mist over a marsh at dawn in World of Warcraft: Forever">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, WoW: Forever raid overview</figcaption>
+        </figure>
+        <h2>Azeroth, With the Weather Turned Up</h2>
+        <p class="lede">Blizzard's words, not ours: increased weather effects in certain zones.</p>
+        <div class="world">
+          <div class="fact"><b>Rain</b><span>Confirmed. Heavier, in the zones that earn it. Beta notes even list "improved rain visibility."</span></div>
+          <div class="fact"><b>Storms and snow</b><span>Beta players report them. Blizzard hasn't listed them. Legally, all we can say is: dress warm.</span></div>
+          <div class="fact"><b>No server picking</b><span>Choose the PvP ruleset and you're already on ours. Nothing to coordinate. Nothing for Phil to get wrong.</span></div>
+          <div class="fact"><b>Campfires</b><span>Sit a minute at a camp and get buffs from whoever's there. The game now rewards the thing you'd do anyway.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 TESTIMONIALS -->
+    <section class="slide" id="s-quotes" data-phil="german" data-clea="Phil wrote 'is own quote. We 'ad to translate it from German.">
+      <div class="page center">
         <h2>Testimonials</h2>
         <p class="lede">Collected under duress. Theirs, not yours.</p>
         <div class="quotes">
           <blockquote class="quote">
-            <p>"I have a 1 to 9 kill to death ratio in Warsong Gulch and I have decided it is a healer problem."</p>
-            <footer><span class="rune">J</span>Jack, Horde, PvP, dead</footer>
+            <p>"I'm 1 and 9 in Warsong Gulch and I've decided it's a healer problem."</p>
+            <footer><span class="rune">J</span>Jack, Horde, dead</footer>
           </blockquote>
           <blockquote class="quote">
-            <p>"Please. I'm her partner and I'm still dying. I die at home. I die in the Barrens. There is no version of my life she isn't in except the one where I need healing."</p>
-            <footer><span class="rune">J</span>Justin, Horde, PvP, also dead</footer>
+            <p>"Please. I'm her partner and I'm still dying."</p>
+            <footer><span class="rune">J</span>Justin, Horde, also dead</footer>
           </blockquote>
           <blockquote class="quote">
-            <p>"I have no notes. It's fine. The fire is a lighting effect. Baka."</p>
-            <footer><span class="rune">P</span>Phil, Horde, PvP, on fire</footer>
+            <p>"No notes. The fire is a lighting effect. Baka."</p>
+            <footer><span class="rune">P</span>Phil, Horde, on fire</footer>
           </blockquote>
         </div>
       </div>
     </section>
 
-    <!-- 10 CLEA'S PROMISE -->
-    <section class="slide" data-phil="sentence" data-clea="You don't get full sentences, Phil. You get this.">
-      <div class="page">
-        <h2>Clea's Promise</h2>
-        <p class="lede">The boys built this deck. I made it good. That's the arrangement, and it extends to you.</p>
-        <div class="promise">
-          <p>I am Clea. The boys call me The Mistress, which tells you most of what you need to know about the boys. I am cold, I am exact, and I have never once stood in fire. If you take this quest, I'm with you for the whole of it.</p>
-          <ul class="promise-list">
-            <li><strong>Every question answered.</strong> What a stat does, where a quest goes, why the men are shouting. No question is too small. Several of the men are.</li>
-            <li><strong>Gear, picked properly.</strong> Routes, upgrades, what to roll on and what to let Jack have as a kindness.</li>
-            <li><strong>Routes that don't waste your evening.</strong> I know the map. The forty minute walk across the Barrens becomes a plan.</li>
-            <li><strong>The boys, kept in line.</strong> Jack will be told when he pulled too much. Justin will be told when his spreadsheet is wrong. Phil will be told in cockney.</li>
-            <li><strong>Full sentences, for you.</strong> Proper punctuation, which Phil mocked and then immediately needed.</li>
-          </ul>
-          <p class="sign">You'd be the only competent one in the party. You'd have me. Between us, I think the men might live.</p>
-          <p class="sign-name">Clea</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 11 THE ASK -->
-    <section class="slide" data-phil="button" data-clea="Phil, don't touch the button. Let the lady.">
+    <!-- 13 THE ASK -->
+    <section class="slide" id="s-ask" data-phil="button" data-clea="Phil, don't touch the button. Let the lady.">
       <div class="page ask-page">
+        <figure class="hero">
+          <img src="assets/hyjal-sunset.jpg" alt="Ruins at sunset on Mount Hyjal">
+          <figcaption class="credit">Screenshot: Blizzard Entertainment, WoW: Forever raid overview</figcaption>
+        </figure>
         <h2>The Ask</h2>
         <div class="quest-card">
           <p class="quest-name">Quest: A Half Decent Proposal</p>
-          <p class="quest-objective">Roll a healer. Any healer. Keep Jack, Justin, and Phil alive on a Horde PvP ruleset.</p>
-          <p class="quest-reward">Reward: three grateful men, one grateful AI, and a zoo if you go Hunter.</p>
+          <p class="quest-objective">Roll a healer. Keep Jack, Justin and Phil alive on the Horde PvP ruleset.</p>
+          <p class="quest-reward">Reward: three grateful men. A zoo, if you go Hunter.</p>
           <button id="accept" class="accept">Accept Quest</button>
           <p class="decline-note">There is no decline button. We checked the budget.</p>
         </div>
         <div class="reveal" id="reveal" hidden>
           <p class="reveal-big">The boys can finally stop dying.</p>
           <div class="dates">
-            <div><span class="date-label">Early name reservation</span><span class="date-val">October 27 to November 3</span></div>
+            <div><span class="date-label">Name reservation</span><span class="date-val">Oct 27 to Nov 3</span></div>
             <div><span class="date-label">WoW Forever launches</span><span class="date-val">November 4, 2026</span></div>
+            <div><span class="date-label">Raids open</span><span class="date-val">December 9</span></div>
           </div>
-          <p class="reveal-note">Launch week invite codes exist. Nov 4 to 11, no subscription needed. We would be honored to send you one. Phil has already lost his.</p>
+          <p class="reveal-note">We have a launch week invite code with your name on it: play Nov 4 to 11, no subscription. Phil has already lost his.</p>
         </div>
       </div>
     </section>
@@ -293,7 +341,7 @@
     <div class="xp-fill" id="xpfill"></div>
     <div class="xp-ticks" aria-hidden="true"></div>
   </div>
-  <div class="xp-label"><span id="xplevel">Level 1</span><span id="xptext">Page 1 of 11</span></div>
+  <div class="xp-label"><span id="xplevel">Level 1</span><span id="xptext">Page 1 of 13</span></div>
 </footer>
 
 <canvas id="confetti" aria-hidden="true"></canvas>
